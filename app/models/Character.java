@@ -1,5 +1,8 @@
 package models;
 
+import java.util.Collection;
+import java.util.Map;
+
 public class Character
 {
 	private static int getModifier(byte num)
@@ -8,12 +11,12 @@ public class Character
 	}
 	
 	private String name;
-	private Alignment align;
-	private Player player;
+	// private Alignment align;
+	// private Player player;
 	private String deity;
 	private String homeland;
-	private Race race;
-	private Size size;
+	// private Race race;
+	// private Size size;
 	private String gender;
 	private int age;
 	private String height;
@@ -21,30 +24,30 @@ public class Character
 	private String hair;
 	private String eyes;
 	
-	private Collection<Level> levels;
+	//private Collection<Level> levels;
 	
 	private byte str = 10; // Strength Score
 	private byte dex = 10; // Dexterity Score
-	private byte con = 10; // Consitution Score
-	private byte inte = 10; // Inteligence Score (Four letters because, "int," is a key word)
+	private byte con = 10; // Constitution Score
+	private byte inte = 10; // Intelligence Score (Four letters because, "int," is a key word)
 	private byte wis = 10; // Wisdom Score
 	private byte cha = 10; // Charisma Score
 	
-	private transient byte initMod = 0; // Initative Modifier
+	private transient byte initMod = 0; // Initiative Modifier
 	private transient byte bab = 0; // Base Attack Bonus
 	private transient byte ac = 10; // Armor Class
 	private transient byte touch = 10; // Touch Armor Class
 	private transient byte flatFooted = 10; // Flat Footed Armor Class
 	private transient byte dr = 0; // Damage Reduction
-	private transient byte cmb = 0; // Combat Manuver Bonus
-	private transient byte cmd = 10; // Combat Manuver Defense
+	private transient byte cmb = 0; // Combat Maneuver Bonus
+	private transient byte cmd = 10; // Combat Maneuver Defense
 	private byte lethDmg = 0; // Lethal Damage
 	private byte nlethDmg = 0; // Nonlethal Damage
 	private byte hitPoints; // Maximum Hit Points
 	
 	private transient byte landSpeed = 30; // Land Speed in feet/turn
 	private transient byte flySpeed = 0; // Flying Speed
-	private transient byte swimSpeed = 0; // Swiming Speed
+	private transient byte swimSpeed = 0; // Swimming Speed
 	private transient byte borrowSpeed = 0; // Burrowing Speed
 	
 	private transient byte splRes = 0; // Spell Resistance
@@ -80,6 +83,7 @@ public class Character
 	private byte swimRnk = 0;
 	private byte useMagicDeviceRnk = 0;
 	
+	/*
 	private Collection<> inventory;
 	
 	private Collection<> states;
@@ -87,13 +91,14 @@ public class Character
 	private Collection<Feat> feats;
 	
 	private Collection<Attack> attacks;
+	*/
 	
 	private Collection<String> languages;
 	
 	// --- Strength --------------------------------------------------
 	public void setStr(int num)
 	{
-		str = num;
+		str = (byte) num;
 	}
 	
 	public int getStr()
@@ -109,7 +114,7 @@ public class Character
 	// --- Dexterity -------------------------------------------------
 	public void setDex(int num)
 	{
-		dex = num;
+		dex = (byte) num;
 	}
 	
 	public int getDex()
@@ -122,10 +127,10 @@ public class Character
 		return getModifier(dex);
 	}
 	
-	// --- Consitution -----------------------------------------------
+	// --- Constitution -----------------------------------------------
 	public void setCon(int num)
 	{
-		con = num;
+		con = (byte) num;
 	}
 	
 	public int getCon()
@@ -138,10 +143,10 @@ public class Character
 		return getModifier(con);
 	}
 	
-	// --- Inteligence -----------------------------------------------
+	// --- Intelligence -----------------------------------------------
 	public void setInt(int num)
 	{
-		inte = num;
+		inte = (byte) num;
 	}
 	
 	public int getInt()
@@ -157,7 +162,7 @@ public class Character
 	// --- Wisdom ----------------------------------------------------
 	public void setWis(int num)
 	{
-		wis = num;
+		wis = (byte) num;
 	}
 	
 	public int getWis()
@@ -173,7 +178,7 @@ public class Character
 	// --- Charisma --------------------------------------------------
 	public void setCha(int num)
 	{
-		cha = num;
+		cha = (byte) num;
 	}
 	
 	public int getCha()

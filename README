@@ -1,49 +1,51 @@
-This is your new Play application
-=================================
+# Craft: Character
+
+Craft: Character is a web application for managing Pathfinder character sheets.
+
+## Dependencies
+* JDK v1.8+
+* SBT v0.13+
+* MongoDB
+
+## Install
+Run:
+`git clone https://tflucke@github.com/lexives/craft-character.git`
+
+## Configure IDE
+### Eclipse
+Run once before using:
+`sbt eclipse`
+** Note: ** You will have to rerun this command if your project directory changes.
+
+To enter debug mode, run:
+`sbt -jvm-debug <debug port> run`
+or
+`sbt -jvm-debug <debug port> ~run`
+
+To use the eclipse debugger,  Right-Click on the craft-character project and
+navigate to Debug As > Debug Configurations.  Right-Click Remote Java Applications
+and click New.  Set the debug port and apply.
+
+## Running
+To run the program, run the command:
+`sbt run`
+Connect to the program using your web browser and the URL "http://0.0.0.0:9000".
+
+Instead, to automatically recompile when the source changes, run :
+`sbt ~run`
 
 This file will be packaged with your application when using `activator dist`.
 
 There are several demonstration files available in this template.
 
-Controllers
-===========
+## Distributing
+To package the final product, run:
+`sbt dist`
+This will create a zip file in craft-character/target/universal/ directory containing
+the runnable play server.  
 
-- HomeController.java:
+## Contributors
+Developed by Lexi Ives and Thomas Flucke.
 
-  Shows how to handle simple HTTP requests.
-
-- AsyncController.java:
-
-  Shows how to do asynchronous programming when handling a request.
-
-- CountController.java:
-
-  Shows how to inject a component into a controller and use the component when
-  handling requests.
-
-Components
-==========
-
-- Module.java:
-
-  Shows how to use Guice to bind all the components needed by your application.
-
-- Counter.java:
-
-  An example of a component that contains state, in this case a simple counter.
-
-- ApplicationTimer.java:
-
-  An example of a component that starts when the application starts and stops
-  when the application stops.
-
-Filters
-=======
-
-- Filters.java:
-
-  Creates the list of HTTP filters used by your application.
-
-- ExampleFilter.java
-
-  A simple filter that adds a header to every response.
+## License
+TBD - see the LICENSE.md file for details

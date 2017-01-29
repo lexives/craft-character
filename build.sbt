@@ -16,3 +16,6 @@ libraryDependencies += cache
 
 // MongoDB driver
 libraryDependencies += "uk.co.panaxiom" %% "play-jongo" % "2.0.0-jongo1.3"
+
+// Compile before setting up eclipse
+EclipseKeys.preTasks := Seq(compile in Compile)

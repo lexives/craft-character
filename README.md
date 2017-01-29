@@ -15,6 +15,7 @@ Run:
 ### Eclipse
 Run once before using:
 `sbt eclipse`
+<<<<<<< HEAD
 
 **Note:** You will have to rerun this command if your project directory changes.
 
@@ -49,4 +50,8 @@ the runnable play server.
 Developed by Lexi Ives and Thomas Flucke.
 
 ## License
+<<<<<<< HEAD
 TBD - see the LICENSE.md file for details
+=======
+TBD - see the LICENSE.md file for details
+>>>>>>> 154729a79df35e4d28cd6eefd2e822321032934a

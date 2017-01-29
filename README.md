@@ -15,7 +15,6 @@ Run:
 ### Eclipse
 Run once before using:
 `sbt eclipse`
-<<<<<<< HEAD
 
 **Note:** You will have to rerun this command if your project directory changes.
 

@@ -3,25 +3,23 @@ package controllers;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import com.mongodb.WriteResult;
+
 import models.Test;
-import play.mvc.Controller;
 import play.mvc.Result;
-import uk.co.panaxiom.playjongo.PlayJongo;
 
 @Singleton
-public class DBTestController extends Controller {
-    
-    private PlayJongo db;
+public class DBTestController extends DBController<Test> {
 
     @Inject
-    public DBTestController(PlayJongo jongo) {
-	db = jongo;
+    public DBTestController() {
+	super(Test.class);
     }
  
 
     public Result put() {
 	Test tmp = play.libs.Json.fromJson(request().body().asJson(), Test.class);
-	db.getCollection("test").insert(tmp);
+	WriteResult wr = db().insert(tmp);
         return ok(play.libs.Json.toJson(tmp));
     }
 }

@@ -3,35 +3,37 @@ package models;
 import java.util.Collection;
 import java.util.Map;
 
-public class Character
+public class Character extends MongoObject
 {
 	private static int getModifier(byte num)
 	{
 		return num / 2 - 5;
 	}
-	
-	private String name;
-	// private Alignment align;
+
+	// *** Character Info ********************************************
+	private String name = "";
+	private Alignment align = Alignment.TRUE_NEUTRAL;
 	// private Player player;
-	private String deity;
-	private String homeland;
+	private String deity = "";
+	private String homeland = "";
 	// private Race race;
 	// private Size size;
-	private String gender;
+	private String gender = "";
 	private int age;
 	private String height;
 	private String weight;
-	private String hair;
-	private String eyes;
-	
-	//private Collection<Level> levels;
-	
+	private String hair = "";
+	private String eyes = "";
+
+	// *** Ability Scores ********************************************
 	private byte str = 10; // Strength Score
 	private byte dex = 10; // Dexterity Score
 	private byte con = 10; // Constitution Score
 	private byte inte = 10; // Intelligence Score (Four letters because, "int," is a key word)
 	private byte wis = 10; // Wisdom Score
 	private byte cha = 10; // Charisma Score
+	
+	//private Collection<Level> levels;
 	
 	private transient byte initMod = 0; // Initiative Modifier
 	private transient byte bab = 0; // Base Attack Bonus
@@ -94,6 +96,8 @@ public class Character
 	*/
 	
 	private Collection<String> languages;
+	
+	// *** Ability Scores ********************************************
 	
 	// --- Strength --------------------------------------------------
 	public void setStr(int num)
@@ -189,5 +193,95 @@ public class Character
 	public int getChaMod()
 	{
 		return getModifier(cha);
+	}
+
+	// *** Character Info ********************************************
+	
+	// --- Name ------------------------------------------------------
+	public void setName(String name)
+	{
+	    this.name = name;
+	}
+	
+	public String getName()
+	{
+	    return name;
+	}
+
+	// --- Alignment -------------------------------------------------
+	/*public void setAlignment(String align)
+	{
+	    align = getAlignment(align);
+	}*/
+	
+	public Alignment getAlignment()
+	{
+	    return align;
+	}
+
+	// --- Deity -----------------------------------------------------
+	public String getDeity()
+	{
+	    return deity;
+	}
+	
+	public void getDeity(String deity)
+	{
+	    this.deity = deity;
+	}
+
+	// --- Homeland --------------------------------------------------
+	public String getHomeland()
+	{
+	    return homeland;
+	}
+	
+	public void getHomeland(String homeland)
+	{
+	    this.homeland = homeland;
+	}
+
+	// --- Gender ----------------------------------------------------
+	public String getGender()
+	{
+	    return gender;
+	}
+	
+	public void getGender(String gender)
+	{
+	    this.gender = gender;
+	}
+
+	// --- Age -------------------------------------------------------
+	public int getAge()
+	{
+	    return age;
+	}
+	
+	public void getAge(int age)
+	{
+	    this.age = age;
+	}
+
+	// --- Hair ------------------------------------------------------
+	public String getHair()
+	{
+	    return hair;
+	}
+	
+	public void getHair(String hair)
+	{
+	    this.hair = hair;
+	}
+
+	// --- Eyes ------------------------------------------------------
+	public String getEyes()
+	{
+	    return eyes;
+	}
+	
+	public void setEyes(String eyes)
+	{
+	    this.eyes = eyes;
 	}
 }

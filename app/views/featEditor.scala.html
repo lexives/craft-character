@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="devHelper">
+    <head>
+        <title>Feat Editor</title>
+        <link rel="stylesheet" media="screen" href="assets/stylesheets/main.css">
+        <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
+        <script type="text/javascript" src="assets/lib/angular/angular.js"></script>
+        <script type="text/javascript" src="assets/lib/codemirror/lib/codemirror.js"></script>
+		<link rel="stylesheet" href="assets/lib/codemirror/lib/codemirror.css">
+		<style type="text/css">
+			.CodeMirror
+			{
+				border: 1px solid #eee;
+				height: auto;
+				max-height: 10em;
+			}
+			.CodeMirror-scroll
+			{
+				max-height: 10em;
+			}
+		</style>
+    </head>
+    <body ng-controller="featHelper">
+    	<table style="width: 100%;">
+    		<thead>
+    			<tr>
+    				<td>
+    					<label for="nameIn">Name</label>
+    				</td>
+    				<td>
+    					<label for="summIn">Summary</label>
+    				</td>
+    				<td>
+    					<label for="descIn">Description</label>
+    				</td>
+    				<td>
+    					<label for="jsIn">Code</label>
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>
+        				<input id="nameIn" type="text" />
+    				</td>
+    				<td>
+    					<textarea id="summIn"></textarea>
+    				</td>
+    				<td>
+    					<textarea id="descIn"></textarea>
+    				</td>
+    				<td style="width: 100%;">
+    					<div class="jsedit" id="jsIn"></div>
+    				</td>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			<tr data-ng-repeat="feat in feats">
+    				<td>
+        				<input type="text" disabled="disabled" value="{{feat.name}}" />
+    				</td>
+    				<td>
+    					<textarea disabled="disabled"{{feat.summary}}</textarea>
+    				</td>
+    				<td>
+    					<textarea disabled="disabled">{{feat.description}}</textarea>
+    				</td>
+    				<td style="width: 100%;">
+    					<div class="jsedit disabled">{{code}}</div>
+    				</td>
+    			</tr>
+    		</tbody>
+    	</table>
+    	<script type="text/javascript">
+    		var elms = document.getElementsByClassName("jsedit");
+    		for (var i = 0; i < elms.length; i++)
+    		{
+	    		CodeMirror(elms[i], {
+		    		lineNumbers: true,
+		    		viewportMargin: Infinity,
+		    		mode: "javascript",
+		    		readOnly: elms[i].className.includes("disabled")
+	    		});
+    		};
+    	</script>
+    	<script type="text/javascript">
+			var app = angular.module("devHelper", []);
+			app.controller("featHelper", function($scope) {
+			});
+		</script>
+    </body>
+</html>

@@ -17,7 +17,7 @@ public class Character extends MongoObject
 	private String deity = "";
 	private String homeland = "";
 	// private Race race;
-	// private Size size;
+	private Size size;
 	private String gender = "";
 	private int age;
 	private String height;
@@ -225,7 +225,7 @@ public class Character extends MongoObject
 	    return deity;
 	}
 	
-	public void getDeity(String deity)
+	public void setDeity(String deity)
 	{
 	    this.deity = deity;
 	}
@@ -236,10 +236,24 @@ public class Character extends MongoObject
 	    return homeland;
 	}
 	
-	public void getHomeland(String homeland)
+	public void setHomeland(String homeland)
 	{
 	    this.homeland = homeland;
 	}
+	
+	// --- Size-------------------------------------------------------
+	public Size getSize() {
+		return size;
+	}
+	
+	public Modifier getSizeMod() {
+		return size.getMod();
+	}
+	
+	public void setSize(Size size) {
+		this.size = size;
+	}
+	
 
 	// --- Gender ----------------------------------------------------
 	public String getGender()
@@ -247,7 +261,7 @@ public class Character extends MongoObject
 	    return gender;
 	}
 	
-	public void getGender(String gender)
+	public void setGender(String gender)
 	{
 	    this.gender = gender;
 	}
@@ -258,7 +272,7 @@ public class Character extends MongoObject
 	    return age;
 	}
 	
-	public void getAge(int age)
+	public void setAge(int age)
 	{
 	    this.age = age;
 	}
@@ -269,7 +283,7 @@ public class Character extends MongoObject
 	    return hair;
 	}
 	
-	public void getHair(String hair)
+	public void setHair(String hair)
 	{
 	    this.hair = hair;
 	}

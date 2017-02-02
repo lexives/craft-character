@@ -4,6 +4,11 @@ public class Modifier {
     private int value;
     private String type;
     
+    public Modifier(String type, int val) {
+    	this.type = type;
+    	value = val;
+    }
+    
     public int getValue()
     {
 	return value;

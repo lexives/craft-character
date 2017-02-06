@@ -15,6 +15,11 @@ public class Modifier {
     {
     }
     
+    public Modifier(String type, int val) {
+    	this.type = type;
+    	value = val;
+    }
+    
     public int getValue()
     {
 	return value;

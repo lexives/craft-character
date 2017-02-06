@@ -222,24 +222,13 @@ public class Character extends MongoObject
 	    return align;
 	}
 
-	// --- Size ------------------------------------------------------
-	/*public void setAlignment(String align)
-	{
-	    align = getAlignment(align);
-	}*/
-	
-	public Size getSize()
-	{
-	    return size;
-	}
-
 	// --- Deity -----------------------------------------------------
 	public String getDeity()
 	{
 	    return deity;
 	}
 	
-	public void getDeity(String deity)
+	public void setDeity(String deity)
 	{
 	    this.deity = deity;
 	}
@@ -250,10 +239,24 @@ public class Character extends MongoObject
 	    return homeland;
 	}
 	
-	public void getHomeland(String homeland)
+	public void setHomeland(String homeland)
 	{
 	    this.homeland = homeland;
 	}
+	
+	// --- Size-------------------------------------------------------
+	public Size getSize() {
+		return size;
+	}
+	
+	public Modifier getSizeMod() {
+		return size.getMod();
+	}
+	
+	public void setSize(Size size) {
+		this.size = size;
+	}
+	
 
 	// --- Gender ----------------------------------------------------
 	public String getGender()
@@ -261,7 +264,7 @@ public class Character extends MongoObject
 	    return gender;
 	}
 	
-	public void getGender(String gender)
+	public void setGender(String gender)
 	{
 	    this.gender = gender;
 	}
@@ -272,7 +275,7 @@ public class Character extends MongoObject
 	    return age;
 	}
 	
-	public void getAge(int age)
+	public void setAge(int age)
 	{
 	    this.age = age;
 	}
@@ -283,7 +286,7 @@ public class Character extends MongoObject
 	    return hair;
 	}
 	
-	public void getHair(String hair)
+	public void setHair(String hair)
 	{
 	    this.hair = hair;
 	}
@@ -367,31 +370,31 @@ public class Character extends MongoObject
 	// --- Combat Maneuver Bonus -------------------------------------
 	public int getCMB()
 	{
-	    return getStrMod() + getBaseAttackBonus() - size.getModifier();
+	    return getStrMod() + getBaseAttackBonus() - size.getMod().getValue();
 	}
 
 	// --- Armor Class -----------------------------------------------
 	public int getAC()
 	{
-	    return 10 + getDexMod() + size.getModifier();
+	    return 10 + getDexMod() + size.getMod().getValue();
 	}
 
 	// --- Touch Armor Class ------------------------------------------
 	public int getTouch()
 	{
-	    return 10 + getDexMod() + size.getModifier();
+	    return 10 + getDexMod() + size.getMod().getValue();
 	}
 
 	// --- Flat Footed Armor Class ------------------------------------
 	public int getFlatFooted()
 	{
-	    return 10 + size.getModifier();
+	    return 10 + size.getMod().getValue();
 	}
 
 	// --- Combat Maneuver Defense -----------------------------------
 	public int getCMD()
 	{
-	    return 10 + getStrMod() + getDexMod() + getBaseAttackBonus() - size.getModifier();
+	    return 10 + getStrMod() + getDexMod() + getBaseAttackBonus() - size.getMod().getValue();
 	}
 	// *** Feats *****************************************************
 

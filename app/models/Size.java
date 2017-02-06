@@ -1,18 +1,34 @@
 package models;
 
+
 public enum Size {
-    FINE(8), DIMINUTIVE(4), TINY(2), SMALL(1), MEDIUM(0), LARGE_TALL(-1), LARGE_LONG(-1),
-    HUGE_TALL(-2), HUGE_LONG(-2), GARGANTUAN_TALL(-4), GARGANTUAN_LONG(-4), COLOSSAL_TALL(-8), COLOSSAL_LONG(-8);
     
-    private byte modifier;
+	FINE(new Modifier("Size", 8), "Fine"),
+	DIMINUTIVE(new Modifier("Size", 4), "Diminutive"),
+	TINY(new Modifier("Size", 2), "Tiny"),
+	SMALL(new Modifier("Size", 1), "Small"),
+	MEDIUM(new Modifier("Size", 0), "Medium"),
+	LARGE(new Modifier("Size", -1), "Large"),
+	HUGE(new Modifier("Size", -2), "Huge"),
+	GARGANTUAN(new Modifier("Size", -4), "Gargantuan"),
+	COLOSSAL(new Modifier("Size", -8), "Colossal");
+
+    private final Modifier mod;
+    private final String str;
     
-    private Size(int modifier)
+    private Size(Modifier mod, String str)
     {
-	this.modifier = (byte) modifier;
+    	this.mod = mod;
+    	this.str = str;
     }
     
-    public int getModifier()
+    public Modifier getMod() {
+    	return mod;
+    }
+    
+    @Override
+    public String toString()
     {
-	return modifier;
+    	return str;
     }
 }

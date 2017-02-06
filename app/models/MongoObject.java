@@ -10,4 +10,16 @@ public class MongoObject {
     {
 	return _id;
     }
+    
+    @Override
+    public int hashCode()
+    {
+	return _id.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object other)
+    {
+	return other instanceof MongoObject && ((MongoObject) other)._id.equals(_id);
+    }
 }

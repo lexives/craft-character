@@ -19,7 +19,7 @@ import uk.co.panaxiom.playjongo.PlayJongo;
 public class DBController<T extends MongoObject> extends Controller {
     
     @Inject
-    private PlayJongo db;
+    protected PlayJongo db;
 
     @NotNull
     private final Class<T> clazz;

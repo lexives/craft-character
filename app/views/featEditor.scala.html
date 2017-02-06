@@ -4,9 +4,12 @@
         <title>Feat Editor</title>
         <link rel="stylesheet" media="screen" href="assets/stylesheets/main.css">
         <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
-        <script type="text/javascript" src="assets/lib/angular/angular.js"></script>
+        <script type="text/javascript" src="assets/lib/angular/angular.min.js"></script>
+        <script type="text/javascript" src="assets/lib/angular-resource/angular-resource.min.js"></script>
         <script type="text/javascript" src="assets/lib/codemirror/lib/codemirror.js"></script>
 		<link rel="stylesheet" href="assets/lib/codemirror/lib/codemirror.css">
+        <script type="text/javascript" src="assets/lib/codemirror/mode/javascript/javascript.js"></script>
+        <script type="text/javascript" src="assets/lib/ui-codemirror/ui-codemirror.js"></script>
 		<style type="text/css">
 			.CodeMirror
 			{
@@ -18,37 +21,50 @@
 			{
 				max-height: 10em;
 			}
+			td
+			{
+				padding: 0.5em;
+			}
+			textarea
+			{
+				width: 100%;
+				height: 100%;
+			}
 		</style>
     </head>
     <body ng-controller="featHelper">
     	<table style="width: 100%;">
     		<thead>
     			<tr>
-    				<td>
+    				<th style="width: 30em;">
     					<label for="nameIn">Name</label>
-    				</td>
-    				<td>
+    				</th>
+    				<th style="width: 20%;">
     					<label for="summIn">Summary</label>
-    				</td>
-    				<td>
+    				</th>
+    				<th style="width: 30%;">
     					<label for="descIn">Description</label>
-    				</td>
-    				<td>
+    				</th>
+    				<th style="width: 100%;">
     					<label for="jsIn">Code</label>
-    				</td>
+    				</th>
     			</tr>
     			<tr>
     				<td>
-        				<input id="nameIn" type="text" />
+        				<input id="nameIn" type="text" data-ng-model="newFeat.name" />
     				</td>
     				<td>
-    					<textarea id="summIn"></textarea>
+    					<textarea id="summIn" data-ng-model="newFeat.summary"></textarea>
     				</td>
     				<td>
-    					<textarea id="descIn"></textarea>
+    					<textarea id="descIn" data-ng-model="newFeat.description"></textarea>
     				</td>
-    				<td style="width: 100%;">
-    					<div class="jsedit" id="jsIn"></div>
+    				<td>
+    					<ui-codemirror id="jsIn" data-ng-model="newFeat.code"
+    						data-ui-codemirror-opts="editOpts"></ui-codemirror>
+    				</td>
+    				<td>
+    					<button type="button" data-ng-click="add(newFeat);">Add</button>
     				</td>
     			</tr>
     		</thead>
@@ -58,32 +74,60 @@
         				<input type="text" disabled="disabled" value="{{feat.name}}" />
     				</td>
     				<td>
-    					<textarea disabled="disabled"{{feat.summary}}</textarea>
+    					<textarea disabled="disabled">{{feat.summary}}</textarea>
     				</td>
     				<td>
     					<textarea disabled="disabled">{{feat.description}}</textarea>
     				</td>
     				<td style="width: 100%;">
-    					<div class="jsedit disabled">{{code}}</div>
+    					<ui-codemirror id="jsIn" data-ui-codemirror-opts="displOpts" data-ng-model="feat.code" />
+    				</td>
+    				<td>
+					<button type="button" data-ng-click="delete(feat);">Delete</button>
     				</td>
     			</tr>
     		</tbody>
     	</table>
     	<script type="text/javascript">
-    		var elms = document.getElementsByClassName("jsedit");
-    		for (var i = 0; i < elms.length; i++)
-    		{
-	    		CodeMirror(elms[i], {
-		    		lineNumbers: true,
-		    		viewportMargin: Infinity,
-		    		mode: "javascript",
-		    		readOnly: elms[i].className.includes("disabled")
-	    		});
-    		};
     	</script>
     	<script type="text/javascript">
-			var app = angular.module("devHelper", []);
-			app.controller("featHelper", function($scope) {
+			var app = angular.module("devHelper", ["ngResource", "ui.codemirror"]);
+			app.controller("featHelper", function($scope, $resource) {
+				$scope.editOpts = {
+			        lineNumbers: true,
+		    		viewportMargin: Infinity,
+		    		mode: "text/javascript"
+			    };
+				$scope.displOpts = {
+			        lineNumbers: true,
+		    		viewportMargin: Infinity,
+		    		mode: "text/javascript",
+		    		readOnly: true
+			    };
+			    
+				$scope.newFeat = {};
+				var Feat = $resource('/feat/:id', {id: "@@id"});
+				$scope.feats = Feat.query(function(res)
+				{
+					console.log(res);
+				}, function()
+				{
+					$scope.feats = [];
+				});
+				
+				$scope.add = function(newFeat)
+				{
+					new Feat(newFeat).$save(function(feat)
+					{
+						$scope.feats.push(feat);
+					});
+				};
+				
+				$scope.delete = function(feat)
+				{
+					$scope.feats.splice($scope.feats.indexOf(feat), 1);
+					feat.$remove();
+				};
 			});
 		</script>
     </body>

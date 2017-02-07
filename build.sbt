@@ -10,10 +10,11 @@ scalaVersion := "2.11.8"
 
 // TODO: Remove unused dependencies
 // Java SQL driver
-libraryDependencies += javaJdbc
+// libraryDependencies += javaJdbc
 libraryDependencies += cache
 // libraryDependencies += javaWs
 libraryDependencies += javaJpa
+libraryDependencies += "org.hibernate.ogm" % "hibernate-ogm-mongodb" % "5.1.0.Beta3"
 
 // MongoDB driver
 libraryDependencies += "uk.co.panaxiom" %% "play-jongo" % "2.0.0-jongo1.3"

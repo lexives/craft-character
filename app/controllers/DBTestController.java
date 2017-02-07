@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 import com.mongodb.WriteResult;
 
 import models.Test;
+import play.db.jpa.JPA;
 import play.mvc.Result;
 
 @Singleton
@@ -19,7 +20,7 @@ public class DBTestController extends DBController<Test> {
 
     public Result put() {
 	Test tmp = play.libs.Json.fromJson(request().body().asJson(), Test.class);
-	WriteResult wr = db().insert(tmp);
+	JPA.em().persist(tmp);
         return ok(play.libs.Json.toJson(tmp));
     }
 }

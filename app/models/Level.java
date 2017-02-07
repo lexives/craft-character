@@ -1,6 +1,6 @@
 package models;
 
-public class Level extends MongoObject
+public class Level extends DBObject
 {
     private byte bab;
     private byte fort;

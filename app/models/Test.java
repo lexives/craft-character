@@ -1,5 +1,5 @@
 package models;
 
-public class Test extends MongoObject {
+public class Test extends DBObject {
     public String a;
 }

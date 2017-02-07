@@ -2,7 +2,7 @@ package models;
 
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 
-public class MongoObject {
+public class DBObject {
     @MongoObjectId
     private String _id;
     
@@ -20,6 +20,6 @@ public class MongoObject {
     @Override
     public boolean equals(Object other)
     {
-	return other instanceof MongoObject && ((MongoObject) other)._id.equals(_id);
+	return other instanceof DBObject && ((DBObject) other)._id.equals(_id);
     }
 }

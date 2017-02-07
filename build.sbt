@@ -10,9 +10,10 @@ scalaVersion := "2.11.8"
 
 // TODO: Remove unused dependencies
 // Java SQL driver
-// libraryDependencies += javaJdbc
+libraryDependencies += javaJdbc
 libraryDependencies += cache
 // libraryDependencies += javaWs
+libraryDependencies += javaJpa
 
 // MongoDB driver
 libraryDependencies += "uk.co.panaxiom" %% "play-jongo" % "2.0.0-jongo1.3"

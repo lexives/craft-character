@@ -2,6 +2,6 @@ package models;
 
 import java.util.List;
 
-public class RPGClass extends MongoObject {
+public class RPGClass extends DBObject {
     private List<Level> levels; 
 }

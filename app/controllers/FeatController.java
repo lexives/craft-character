@@ -1,15 +1,12 @@
 package controllers;
 
+import play.db.jpa.JPA;
 import play.libs.Json;
 import play.mvc.Result;
 
 import java.util.List;
 
 import javax.inject.Inject;
-
-import org.bson.types.ObjectId;
-
-import com.mongodb.WriteResult;
 
 import models.Feat;
 
@@ -32,7 +29,7 @@ public class FeatController extends DBController<Feat> {
 	{
 	    f = new Feat();
 	}
-	db().insert(f);
+	JPA.em().persist(f);
 	return created(Json.toJson(f));
     }
 
@@ -41,16 +38,9 @@ public class FeatController extends DBController<Feat> {
 	try
 	{
 	    Feat f = getBody();
-	    WriteResult wr = db().update(new ObjectId(id)).with(f);
+	    JPA.em().merge(id);
 	    f = find(id);
-	    if (!wr.isUpdateOfExisting())
-	    {
-		return created(Json.toJson(f));
-	    }
-	    else 
-	    {
-		return ok(Json.toJson(f));
-	    }
+	    return ok(Json.toJson(f));
 	}
 	catch (IllegalArgumentException iae)
 	{
@@ -69,7 +59,7 @@ public class FeatController extends DBController<Feat> {
 	    Feat f = find(id);
 	    if (f != null)
 	    {
-		db().remove(new ObjectId(id));
+		JPA.em().remove(f);
 		return ok(Json.toJson(f));
 	    }
 	    else 

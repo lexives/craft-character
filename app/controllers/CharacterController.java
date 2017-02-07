@@ -1,5 +1,6 @@
 package controllers;
 
+import play.db.jpa.JPA;
 import play.libs.Json;
 import play.mvc.Result;
 
@@ -7,11 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import org.bson.types.ObjectId;
-import org.jongo.MongoCollection;
-
-import com.mongodb.WriteResult;
 
 import models.Character;
 import models.Feat;
@@ -26,7 +22,7 @@ public class CharacterController extends DBController<Character> {
     public Result create()
     {
 	Character c = new Character();
-	db().insert(c);
+	JPA.em().persist(c);
 	return created(Json.toJson(c));
     }
 	
@@ -45,10 +41,9 @@ public class CharacterController extends DBController<Character> {
 	{
 	    try
 	    {
-		MongoCollection featDB = db.getCollection("Feat");
 		List<Feat> newFeats = new LinkedList<>();
-		newFeatIds.forEach(feat -> {
-		    Feat f = featDB.findOne(new ObjectId(feat)).as(Feat.class);
+		newFeatIds.forEach((String feat) -> {
+		    Feat f = JPA.em().find(Feat.class, feat);
 		    if (f == null)
 		    {
 			throw new NullPointerException("Feat ID "+feat+" does not exist");
@@ -56,7 +51,7 @@ public class CharacterController extends DBController<Character> {
 		    newFeats.add(f);
 		});
 		newFeats.forEach(feat -> c.addFeat(feat));
-		db().save(c);
+		JPA.em().merge(c);
 		return ok(Json.toJson(c));
 	    }
 	    catch (IllegalArgumentException iae)
@@ -79,16 +74,9 @@ public class CharacterController extends DBController<Character> {
 	try
 	{
 	    Character c = getBody();
-	    WriteResult wr = db().update(new ObjectId(id)).with(c);
+	    JPA.em().merge(c);
 	    c = find(id);
-	    if (!wr.isUpdateOfExisting())
-	    {
-		return created(Json.toJson(c));
-	    }
-	    else 
-	    {
-		return ok(Json.toJson(c));
-	    }
+	    return ok(Json.toJson(c));
 	}
 	catch (IllegalArgumentException iae)
 	{
@@ -107,7 +95,7 @@ public class CharacterController extends DBController<Character> {
 	    Character c = find(id);
 	    if (c != null)
 	    {
-		db().remove(new ObjectId(id));
+		JPA.em().remove(c);
 		return ok(Json.toJson(c));
 	    }
 	    else 

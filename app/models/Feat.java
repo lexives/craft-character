@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
-public class Feat extends MongoObject {
+public class Feat extends DBObject {
     
     private static final NashornScriptEngine scriptEv;
     

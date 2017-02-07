@@ -9,7 +9,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Character extends MongoObject
+public class Character extends DBObject
 {
 	private static int getModifier(byte num)
 	{

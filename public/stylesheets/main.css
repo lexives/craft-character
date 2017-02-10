@@ -3,6 +3,10 @@ body {
 	overflow-x: hidden;
 }
 
+h1 {
+	margin-top: -5px;
+}
+
 .navbar-right { 
 	padding-top: 8px;
 	padding-left: 10px;
@@ -43,7 +47,7 @@ body {
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 20px;
+    padding: 15px;
 }
 
 #wrapper.sidebar-open #page-content-wrapper {
@@ -53,6 +57,17 @@ body {
 
 #char-searchbar {
 	padding: 10px;
+}
+
+.char-header {
+	padding: 20px;
+	padding-bottom:5px;
+	background-color: #e6e6e6;
+}
+
+.header-details > p {
+	display: inline-block;
+	padding-right: 5px;
 }
 
 /*---------Sidebar Styles---------*/

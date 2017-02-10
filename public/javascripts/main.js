@@ -8,4 +8,13 @@ mainApp.controller('mainCtrl', function($scope) {
 		$scope.calculation = $scope.first + ' + ' + $scope.second +
 			" = " + (+$scope.first + +$scope.second);
 	};
+	
+	//--------------------------------------------------------------
+	
+	$scope.sidebarOpen = true;
+	$scope.searchedChar = "---";
+	
+	$scope.searchForChar = function() {
+		$scope.searchedChar = document.getElementById("char-search").value;
+	};
 });

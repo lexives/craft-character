@@ -17,7 +17,7 @@
      *@
     @*@play20.welcome(message, style = "Java")*@    
     
-    <div ng-controller="mainCtrl">
+    <div ng-controller="mainCtrl" id="wrapper" ng-class="sidebarOpen ? 'sidebar-closed' : 'sidebar-open'">
     
     <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -40,19 +40,27 @@
 	    	</div><!-- /.navbar-collapse -->
     	</div><!-- /.container-fluid -->
     </nav>
+    
+    <!-- SIDEBAR -->
+    <div id="sidebar-wrapper">
+	    <ul class="sidebar-nav">
+	        <li class="sidebar-brand"> <a>Select a Character</a> </li>
+			<div class="input-group input-group-sm" id="char-searchbar">
+				<input type="text" class="form-control" id="char-search" placeholder="Search for...">
+				<span class="input-group-btn">
+				    <button class="btn btn-default" type="button" ng-click="searchForChar()">Search</button>
+				</span>
+			</div><!-- /input-group -->
+	    </ul>
+    </div>
  
- 	<!-- Placeholder content, AngularJS test -->
-	<p>Input something in the input box:</p>
-	<p>Name : <input type="text" ng-model="name" placeholder="Enter name here"></p>
-	<h1>Hello, {{name}}</h1>
-	
-	<br><br>
-	<span>Values:</span>
-	<input type="text" ng-model="first" />
-	<input type="text" ng-model="second" />
-	<button ng-click="updateValue()">Sum</button>
-	<br><br>
-	{{calculation}}
+ 
+ 	<!-- MAIN CONTENT -->
+ 	<div id="page-content-wrapper">
+	    <h1>Search for a character in the sidebar</h1>
+	    <p>{{searchedChar}}</p>
+	    <button class="btn btn-primary" ng-click="sidebarOpen = !sidebarOpen" >Toggle Sidebar</button>
+ 	</div>
 	
 	</div><!-- /mainCtrl -->
 }

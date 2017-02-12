@@ -1,9 +1,18 @@
 package models;
 
-import org.jongo.marshall.jackson.oid.MongoObjectId;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+import org.bson.types.ObjectId;
+import org.hibernate.annotations.Type;
+
+@MappedSuperclass
 public class DBObject {
-    @MongoObjectId
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Type(type = "objectid")
     private String _id;
     
     public String getId()
@@ -14,7 +23,7 @@ public class DBObject {
     @Override
     public int hashCode()
     {
-	return _id.hashCode();
+	return new ObjectId(_id).hashCode();
     }
     
     @Override

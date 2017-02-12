@@ -1,6 +1,6 @@
 package controllers;
 
-import play.db.jpa.JPA;
+import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Result;
 
@@ -19,13 +19,15 @@ public class CharacterController extends DBController<Character> {
 	super(Character.class);
     }
 
+    @Transactional
     public Result create()
     {
 	Character c = new Character();
-	JPA.em().persist(c);
+	em().persist(c);
 	return created(Json.toJson(c));
     }
-	
+
+    @Transactional
     public Result addFeats(String id, List<String> newFeatIds)
     {
 	Character c;
@@ -43,7 +45,7 @@ public class CharacterController extends DBController<Character> {
 	    {
 		List<Feat> newFeats = new LinkedList<>();
 		newFeatIds.forEach((String feat) -> {
-		    Feat f = JPA.em().find(Feat.class, feat);
+		    Feat f = em().find(Feat.class, feat);
 		    if (f == null)
 		    {
 			throw new NullPointerException("Feat ID "+feat+" does not exist");
@@ -51,7 +53,7 @@ public class CharacterController extends DBController<Character> {
 		    newFeats.add(f);
 		});
 		newFeats.forEach(feat -> c.addFeat(feat));
-		JPA.em().merge(c);
+		em().merge(c);
 		return ok(Json.toJson(c));
 	    }
 	    catch (IllegalArgumentException iae)
@@ -69,12 +71,13 @@ public class CharacterController extends DBController<Character> {
 	}
     }
 
+    @Transactional
     public Result update(String id)
     {
 	try
 	{
 	    Character c = getBody();
-	    JPA.em().merge(c);
+	    em().merge(c);
 	    c = find(id);
 	    return ok(Json.toJson(c));
 	}
@@ -88,6 +91,7 @@ public class CharacterController extends DBController<Character> {
 	}
     }
 
+    @Transactional
     public Result delete(String id)
     {
 	try
@@ -95,7 +99,7 @@ public class CharacterController extends DBController<Character> {
 	    Character c = find(id);
 	    if (c != null)
 	    {
-		JPA.em().remove(c);
+		em().remove(c);
 		return ok(Json.toJson(c));
 	    }
 	    else 
@@ -108,7 +112,8 @@ public class CharacterController extends DBController<Character> {
 	    return badRequest("ID is not valid");
 	}
     }
-    
+
+    @Transactional(readOnly = true)
     public Result list()
     {
 	List<Character> c = find();
@@ -121,7 +126,8 @@ public class CharacterController extends DBController<Character> {
 	    return notFound("You do not have any characters.");
 	}
     }
-    
+
+    @Transactional(readOnly = true)
     public Result get(String id)
     {
 	try

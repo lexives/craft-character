@@ -1,5 +1,6 @@
 package models;
 
+import javax.persistence.Entity;
 import javax.script.Bindings;
 import javax.script.CompiledScript;
 import javax.script.ScriptException;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
+@Entity
 public class Feat extends DBObject {
     
     private static final NashornScriptEngine scriptEv;

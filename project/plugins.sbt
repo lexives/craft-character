@@ -28,9 +28,3 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-play-enhancer" % "1.1.0")
 
 // Eclipse plugin
 addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "5.1.0")
-
-// Angular
-libraryDependencies += "org.webjars.bower" % "angular" % "1.6.1"
-
-// Hibernate
-libraryDependencies += "org.hibernate" % "hibernate-entitymanager" % "5.1.0.Final"

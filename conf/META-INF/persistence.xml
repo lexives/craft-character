@@ -6,7 +6,8 @@
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
         <non-jta-data-source>DefaultDS</non-jta-data-source>
         <properties>
-            <property name="hibernate.ogm.datastore.provider" value="mongodb"/>
+            <property name="hibernate.ogm.datastore.provider"
+            		 value="org.hibernate.ogm.datastore.mongodb.impl.MongoDBDatastoreProvider"/>
             <property name="hibernate.ogm.datastore.host" value="127.0.0.1"/>
             <property name="hibernate.ogm.datastore.port" value="27017"/>
             <property name="hibernate.ogm.datastore.database" value="craftCharacter"/>

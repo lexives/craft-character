@@ -14,10 +14,9 @@ scalaVersion := "2.11.8"
 libraryDependencies += cache
 // libraryDependencies += javaWs
 libraryDependencies += javaJpa
-libraryDependencies += "org.hibernate.ogm" % "hibernate-ogm-mongodb" % "5.1.0.Beta3"
+libraryDependencies += "org.hibernate.ogm" % "hibernate-ogm-core" % "5.0.0.Final"
+libraryDependencies += "org.hibernate.ogm" % "hibernate-ogm-mongodb" % "5.0.0.Final"
 
-// MongoDB driver
-libraryDependencies += "uk.co.panaxiom" %% "play-jongo" % "2.0.0-jongo1.3"
 // AngularJS
 libraryDependencies += "org.webjars.bower" % "angular" % "1.6.1"
 // Angular Resource

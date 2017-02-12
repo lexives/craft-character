@@ -3,10 +3,8 @@ package controllers;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import com.mongodb.WriteResult;
-
 import models.Test;
-import play.db.jpa.JPA;
+import play.db.jpa.Transactional;
 import play.mvc.Result;
 
 @Singleton
@@ -17,10 +15,10 @@ public class DBTestController extends DBController<Test> {
 	super(Test.class);
     }
  
-
+    @Transactional()
     public Result put() {
 	Test tmp = play.libs.Json.fromJson(request().body().asJson(), Test.class);
-	JPA.em().persist(tmp);
+	em().persist(tmp);
         return ok(play.libs.Json.toJson(tmp));
     }
 }

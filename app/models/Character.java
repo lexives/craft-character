@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -71,6 +72,7 @@ public class Character extends DBObject
 	private byte appraiseRnk = 0;
 	private byte bluffRnk = 0;
 	private byte climbRnk = 0;
+	@ElementCollection
 	private Map<String, Byte> craftRnk;
 	private byte diplomacyRnk;
 	private byte disableDeviceRnk = 0;
@@ -80,10 +82,13 @@ public class Character extends DBObject
 	private byte handleAnimalRnk = 0;
 	private byte healRnk = 0;
 	private byte intimidateRnk = 0;
+	@ElementCollection
 	private Map<String, Byte> knowledgeRnk;
 	private byte linguisticsRnk = 0;
 	private byte perceptionRnk = 0;
+	@ElementCollection
 	private Map<String, Byte> professionRnk;
+	@ElementCollection
 	private Map<String, Byte> preformRnk;
 	private byte rideRnk = 0;
 	private byte senseMotiveRnk = 0;
@@ -103,7 +108,8 @@ public class Character extends DBObject
 	
 	private Collection<Attack> attacks;
 	*/
-	
+
+	@ElementCollection
 	private List<String> languages;
 	
 	// *** Ability Scores ********************************************
@@ -465,5 +471,26 @@ public class Character extends DBObject
 		sum += m.getValue();
 	    }
 	    return acrobaticsRnk + getDexMod() + sum;
+	}
+
+	// --- Acrobatics ------------------------------------------------
+	public int getSenseMotiveRank()
+	{
+	    return senseMotiveRnk;
+	}
+	
+	public void getSenseMotiveRank(int rnk)
+	{
+	    senseMotiveRnk = (byte) rnk;
+	}
+	
+	public int getSenseMotive()
+	{
+	    int sum = 0;
+	    for (Modifier m : getModifiers("sense motive"))
+	    {
+		sum += m.getValue();
+	    }
+	    return senseMotiveRnk + getWisMod() + sum;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -42,8 +43,10 @@ public class Character extends DBObject
 	private byte wis = 10; //	Wisdom Score
 	private byte cha = 10; //	Charisma Score
 
+	@OneToMany
 	private List<Level> levels = new LinkedList<>();
 	
+	@OneToMany
 	private Set<Feat> feats = new HashSet<>();
 	
 	private final transient Map<String, List<Modifier>> modifiers = new HashMap<>();

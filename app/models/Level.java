@@ -1,5 +1,8 @@
 package models;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Level extends DBObject
 {
     private byte bab;

@@ -1,15 +1,12 @@
 package controllers;
 
+import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Result;
 
 import java.util.List;
 
 import javax.inject.Inject;
-
-import org.bson.types.ObjectId;
-
-import com.mongodb.WriteResult;
 
 import models.Feat;
 
@@ -21,6 +18,7 @@ public class FeatController extends DBController<Feat> {
 	super(Feat.class);
     }
 
+    @Transactional()
     public Result create()
     {
 	Feat f;
@@ -30,27 +28,21 @@ public class FeatController extends DBController<Feat> {
 	}
 	catch (IllegalStateException ise)
 	{
-	    f = new Feat();
+	    return badRequest("Request body not a properly formed JSON");
 	}
-	db().insert(f);
+	em().persist(f);
 	return created(Json.toJson(f));
     }
 
+    @Transactional()
     public Result update(String id)
     {
 	try
 	{
 	    Feat f = getBody();
-	    WriteResult wr = db().update(new ObjectId(id)).with(f);
+	    em().merge(id);
 	    f = find(id);
-	    if (!wr.isUpdateOfExisting())
-	    {
-		return created(Json.toJson(f));
-	    }
-	    else 
-	    {
-		return ok(Json.toJson(f));
-	    }
+	    return ok(Json.toJson(f));
 	}
 	catch (IllegalArgumentException iae)
 	{
@@ -62,6 +54,7 @@ public class FeatController extends DBController<Feat> {
 	}
     }
 
+    @Transactional()
     public Result delete(String id)
     {
 	try
@@ -69,7 +62,7 @@ public class FeatController extends DBController<Feat> {
 	    Feat f = find(id);
 	    if (f != null)
 	    {
-		db().remove(new ObjectId(id));
+		em().remove(f);
 		return ok(Json.toJson(f));
 	    }
 	    else 
@@ -82,7 +75,8 @@ public class FeatController extends DBController<Feat> {
 	    return badRequest("ID is not valid");
 	}
     }
-    
+
+    @Transactional(readOnly = true)
     public Result list()
     {
 	List<Feat> f = find();
@@ -95,7 +89,8 @@ public class FeatController extends DBController<Feat> {
 	    return notFound("You do not have any feats.");
 	}
     }
-    
+
+    @Transactional(readOnly = true)
     public Result get(String id)
     {
 	try

@@ -1,6 +1,9 @@
 package models;
 
-public class Level extends MongoObject
+import javax.persistence.Entity;
+
+@Entity
+public class Level extends DBObject
 {
     private byte bab;
     private byte fort;

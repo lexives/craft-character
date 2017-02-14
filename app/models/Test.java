@@ -1,5 +1,8 @@
 package models;
 
-public class Test extends MongoObject {
+import javax.persistence.Entity;
+
+@Entity
+public class Test extends DBObject {
     public String a;
 }
